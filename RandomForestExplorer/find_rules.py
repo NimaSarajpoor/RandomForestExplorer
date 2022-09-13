@@ -72,7 +72,7 @@ def _relax_paths(decisions_paths):
     relaxing_mapper =  _get_paths_relaxer(decisions_paths)
 
     out = []
-    for item in decision_paths:
+    for item in decisions_paths:
         lst = []
         for triple in item:
             key = (triple[0], triple[2])
