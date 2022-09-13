@@ -36,10 +36,10 @@ def _get_paths_relaxer(decisions_paths):
     """
     lst = []
     for item in decisions_paths:
-        for triple in item: # triple: tuple with three elements
+        for triple in item:  # triple: tuple with three elements
             lst.append((triple[0], triple[2]))
 
-    relaxing_mapper = {item:[] for item in set(lst)}
+    relaxing_mapper = {item: [] for item in set(lst)}
     for item in decisions_paths:
         for triple in item:
             relaxing_mapper[(triple[0], triple[2])].append(triple[1])
@@ -69,20 +69,14 @@ def _relax_paths(decisions_paths):
     out : List
         A nest list, where each list contains triples that are relaxed.
     """
-    relaxing_mapper =  _get_paths_relaxer(decisions_paths)
+    relaxing_mapper = _get_paths_relaxer(decisions_paths)
 
     out = []
     for item in decisions_paths:
         lst = []
         for triple in item:
             key = (triple[0], triple[2])
-            lst.append(
-                (
-                    triple[0],
-                    triples_relaxer[key],
-                    triple[2]
-                )
-            )
+            lst.append((triple[0], triples_relaxer[key], triple[2]))
 
         out.append(lst)
 
@@ -119,7 +113,7 @@ def _find_rules(rf, x, y_true, min_support=0.2):
     is_pred_correct : bool
         True if `rf` can predict `x` correctly. False otherwise.
     """
-    decisions_paths,  decisions_values, y_pred = get_decision_paths(rf, x)
+    decisions_paths, decisions_values, y_pred = get_decision_paths(rf, x)
 
     if y_pred == y_true:
         is_pred_correct = True

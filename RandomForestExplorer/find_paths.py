@@ -1,9 +1,10 @@
 import numpy as np
 from sklearn.utils.validation import check_is_fitted
 
-#import pandas as pd
-#from mlxtend.preprocessing import TransactionEncoder
-#from mlxtend.frequent_patterns import apriori
+# import pandas as pd
+# from mlxtend.preprocessing import TransactionEncoder
+# from mlxtend.frequent_patterns import apriori
+
 
 def _get_decision_paths(rf, x):
     """
@@ -39,9 +40,9 @@ def _get_decision_paths(rf, x):
         The predicted class of x
     """
     try:
-        if rf.__class__.__name__ != 'RandomForestClassifier':
+        if rf.__class__.__name__ != "RandomForestClassifier":
             raise AttributeError("The object is not random forest classifier")
-        check_is_fitted(rf) # check rf is fitted
+        check_is_fitted(rf)  # check rf is fitted
     except:
         raise ValueError("The input `rf` does not have attribute __class__")
 
@@ -49,7 +50,7 @@ def _get_decision_paths(rf, x):
         raise ValueError("The input `x` is not 1D array")
 
     x_2D = np.atleast_2d(x)
-    sample_id = 0 # because `x` is the first row of x_2D
+    sample_id = 0  # because `x` is the first row of x_2D
 
     y_pred = rf.predict(x_2D)
     y_pred = y_pred[0]
@@ -74,9 +75,9 @@ def _get_decision_paths(rf, x):
         transactions = []
         for node_id in node_index:
             if leaf_id[sample_id] == node_id:
-                continue # continue to the next node if it is a leaf node
+                continue  # continue to the next node if it is a leaf node
 
-            feature_idx = feature=features_id[node_id]
+            feature_idx = feature = features_id[node_id]
             threshold = thresholds_val[node_id]
 
             if x_2D[sample_id, feature_idx] < threshold:
@@ -88,7 +89,7 @@ def _get_decision_paths(rf, x):
 
         decisions_paths.append(transactions)
 
-    return decisions_paths,  decisions_values, y_pred
+    return decisions_paths, decisions_values, y_pred
 
 
 def get_decision_paths(rf, x):
