@@ -78,7 +78,7 @@ def _relax_paths(decisions_paths):
         lst = []
         for triple in item:
             key = (triple[0], triple[2])
-            lst.append((triple[0], triples_relaxer[key], triple[2]))
+            lst.append((triple[0], relaxing_mapper[key], triple[2]))
 
         out.append(lst)
 
