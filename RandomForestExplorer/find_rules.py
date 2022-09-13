@@ -9,24 +9,25 @@ from .find_paths import get_decision_paths
 
 def _get_paths_relaxer(decisions_paths):
     """
-    Given a list of decision_paths, it relax them by merging the decision_maker_values.
-    For instance, the triples (0, 1.4, 1) and (0, 1.6, 1) show that the feature
-    at index 0 is less than 1.4 (former) and less than 1.6 (latter). We can make
-    them similar by using the median of 1.4 and 1.6 of instead of 1.4 or 1.6.
-    We only consider trees that their prediction is the same as y_pred, the prediction
-    of random forest.
+    Given a list of decision_paths, it relax them by merging the
+    decision_maker_values. For instance, the triples (0, 1.4, 1) and (0, 1.6, 1)
+    show that the feature at index 0 is less than 1.4 (former) and less than 1.6
+    (latter). We can make them similar by using the median of 1.4 and 1.6 of
+    instead of 1.4 or 1.6. We only consider trees that their prediction is the
+    same as y_pred, the prediction of random forest.
 
     Parameters
     ----------
     decisions_paths : List
         A nested list of lists, where decision_paths[i] is a list containing the
-        decisions path of x obtained from the i-th decision tree. A decision path
-        is a set of triples (idx, decision_maker_value, indicator), where `idx`
-        is the index of a feature, decision_maker_value is the value that is used
-        to split the idx-th feature, and indicator is a binary value, where 1 means
-        the value of such feature in observation `x` is below `decision_maker_value`.
-        0 otherwise. For example, for random forest with two decision trees, we
-        may have: decisions_paths=[[(1, 3.1, 0)], [(1, 2.5, 1),(0, 7.3, 0)]]
+        decisions path of x obtained from the i-th decision tree. A decision
+        path is a set of triples (idx, decision_maker_value, indicator), where
+        `idx` is the index of a feature, decision_maker_value is the value that
+        is used to split the idx-th feature, and indicator is a binary value,
+        where 1 means the value of such feature in observation `x` is below
+        `decision_maker_value`. 0 otherwise. For example, for random forest with
+        two decision trees, we may have:
+        decisions_paths=[[(1, 3.1, 0)], [(1, 2.5, 1),(0, 7.3, 0)]].
 
     Returns
     -------
@@ -59,10 +60,11 @@ def _relax_paths(decisions_paths):
         decisions path of x obtained from a decision tree. A decision path
         is a set of triples (idx, decision_maker_value, indicator), where `idx`
         is the index of a feature, decision_maker_value is the value that is used
-        to split the idx-th feature, and indicator is a binary value, where 1 means
-        the value of such feature in observation `x` is below `decision_maker_value`.
-        0 otherwise. For example, for random forest with two decision trees, we
-        may have: decisions_paths=[[(1, 3.1, 0)], [(1, 2.5, 1),(0, 7.3, 0)]]
+        to split the idx-th feature, and indicator is a binary value, where 1
+        means the value of such feature in observation `x` is below
+        `decision_maker_value`. 0 otherwise. For example, for random forest with
+        two decision trees, we may have:
+        decisions_paths=[[(1, 3.1, 0)], [(1, 2.5, 1),(0, 7.3, 0)]]
 
     Returns
     -------

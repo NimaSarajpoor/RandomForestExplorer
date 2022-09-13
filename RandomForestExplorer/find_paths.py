@@ -8,8 +8,8 @@ from sklearn.utils.validation import check_is_fitted
 
 def _get_decision_paths(rf, x):
     """
-    Given a fitted random forest classifier -of sklearn, returns the decision paths of
-    tree.
+    Given a fitted random forest classifier -of sklearn, returns the decision
+    paths of tree.
 
     Parameters
     ----------
@@ -28,9 +28,10 @@ def _get_decision_paths(rf, x):
         is a set of triples (idx, decision_maker_value, indicator), where `idx`
         is the index of a feature, decision_maker_value is the value that is used
         to split the idx-th feature, and indicator is a binary value, where 1 means
-        the value of such feature in observation `x` is below `decision_maker_value`.
-        0 otherwise. For example, for random forest with two decision trees, we
-        may have: decisions_paths=[[(1, 3.1, 0)], [(1, 2.5, 1),(0, 7.3, 0)]]
+        the value of such feature in observation `x` is below
+        `decision_maker_value`. 0 otherwise. For example, for random forest with
+        two decision trees, we may have:
+        decisions_paths=[[(1, 3.1, 0)], [(1, 2.5, 1),(0, 7.3, 0)]]
 
     decisions_values : List
         A list with length equal to the number of trees in rf. decisions_values[i]
@@ -94,8 +95,8 @@ def _get_decision_paths(rf, x):
 
 def get_decision_paths(rf, x):
     """
-    Given a fitted random forest classifier -of sklearn, returns the decision paths of
-    tree. This is a convenient wrapper for _get_decision_paths
+    Given a fitted random forest classifier -of sklearn, returns the decision
+    paths of tree. This is a convenient wrapper for _get_decision_paths
 
     Parameters
     ----------
@@ -125,5 +126,4 @@ def get_decision_paths(rf, x):
     y_pred : int, binary
         The predicted class of x
     """
-
     return _get_decision_paths(rf, x)
