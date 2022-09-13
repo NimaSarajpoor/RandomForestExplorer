@@ -10,6 +10,7 @@ setup(
     license='BSD 3-Clause',
     packages=['RandomForestExplorer'],
     install_requires=['numpy>=1.21',
+                      'pandas>=1.4',
                       'mlxtend>=0.20',
                       'scikit-learn>=1.1'],
 
