@@ -1,10 +1,9 @@
 import numpy as np
-import pandas as pd
-
 from sklearn.utils.validation import check_is_fitted
 
-from mlxtend.preprocessing import TransactionEncoder
-from mlxtend.frequent_patterns import apriori
+#import pandas as pd
+#from mlxtend.preprocessing import TransactionEncoder
+#from mlxtend.frequent_patterns import apriori
 
 def _get_decisiion_paths(rf, x):
     """
@@ -80,7 +79,7 @@ def _get_decisiion_paths(rf, x):
             feature_idx = feature=features_id[node_id]
             threshold = thresholds_val[node_id]
 
-            if x[sample_id, feature_idx] < threshold:
+            if x_2D[sample_id, feature_idx] < threshold:
                 is_below_threshold = 1
             else:
                 is_below_threshold = 0
@@ -89,4 +88,4 @@ def _get_decisiion_paths(rf, x):
 
         decisions_paths.append(transactions)
 
-    return decision_paths,  decisions_values, y_pred
+    return decisions_paths,  decisions_values, y_pred
