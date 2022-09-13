@@ -1,2 +1,2 @@
 # RandomForestExplorer
-Using eXplainable AI (XAI) to digest decisions made by random forest
+Using eXplainable AI (XAI) to digest decisions made by random forest using CHIRPS.
