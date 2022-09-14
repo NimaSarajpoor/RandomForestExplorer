@@ -173,3 +173,54 @@ def find_rules(rf, x, y_true, min_support=0.2):
     freq_transactions, is_pred_correct = _find_rules(rf, x, y_true, min_support)
 
     return freq_transactions, is_pred_correct
+
+
+def find_rules_on_samples(rf, X, y_true, min_support=0.2):
+    """
+    Given a fitted random forest classifier `rf`, return a set of rules extracted
+    from decision paths uisng frequent mining. This is a convenient wrapper around
+    _find_rules.
+
+    Parameters
+    ----------
+    rf : a fitted, random forest binary classifier
+        A random forest classiier, instanciated from sklearn random forest class,
+        and fitted.
+
+    X:  : numpy.ndarray
+        A 2D array of real values, where each row corresponds to one observation.
+        Users must ensure that all observations in X are in the same class.
+
+    y_true : int, binary
+        The groundtruth class ID of observation `x`
+
+    min_support : float, default 0.2
+        The minimum support an item should have for being considered as frequent
+
+    Returns
+    -------
+    freq_transactions : pandas.DataFrame
+        A dataframe with two columsn. Each row corresponds to a particular
+        freq transction. First column is the support of freq item and the second
+        column is the freq item itself.
+    """
+    if X.ndim != 2:
+        raise ValueError(f"The array `X` must be 2D. Got {X.ndim} for size")
+
+    all_decision_paths = []
+    for x in X:
+        decisions_paths, y_pred_of_trees, y_pred_rf = get_decision_paths(rf, x)
+        if y_pred_ref == y_true:
+            y_pred_of_trees = np.array(y_pred_of_trees)
+            IDX = np.flatnonzero(y_pred_of_trees == y_true)
+            for idx in IDX:
+                all_decision_paths.append(decisions_paths[idx])
+
+    transactions = _relax_paths(all_decision_paths)
+    te = TransactionEncoder()
+    te_ary = te.fit(transactions).transform(transactions)
+    df = pd.DataFrame(te_ary, columns=te.columns_)
+
+    freq_transactions = apriori(df, min_support=min_support, use_colnames=True)
+
+    return freq_transactions
