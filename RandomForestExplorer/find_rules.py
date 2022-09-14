@@ -210,7 +210,7 @@ def find_rules_on_samples(rf, X, y_true, min_support=0.2):
     all_decision_paths = []
     for x in X:
         decisions_paths, y_pred_of_trees, y_pred_rf = get_decision_paths(rf, x)
-        if y_pred_ref == y_true:
+        if y_pred_rf == y_true:
             y_pred_of_trees = np.array(y_pred_of_trees)
             IDX = np.flatnonzero(y_pred_of_trees == y_true)
             for idx in IDX:
